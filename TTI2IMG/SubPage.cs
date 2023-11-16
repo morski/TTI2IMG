@@ -29,7 +29,15 @@ namespace TTI2IMG
 
             if (!string.IsNullOrWhiteSpace(PN))
             {
-                pageNumber = Convert.ToInt32(PN[..3], 16);
+                try
+                {
+                    pageNumber = int.Parse(PN[..3]);
+                }
+                catch 
+                {
+                    pageNumber = Convert.ToInt32(PN[..3], 16);
+                }
+
             }
 
             if (!string.IsNullOrWhiteSpace(SC))

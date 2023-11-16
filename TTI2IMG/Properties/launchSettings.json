@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TTI2IMG": {
+      "commandName": "Project",
+      "commandLineArgs": "-i TTI -o char -f PNG -h 768 -w 1024"
+    }
+  }
+}

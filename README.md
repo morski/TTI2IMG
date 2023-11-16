@@ -7,11 +7,7 @@ Download the latest release from the [Releases](https://github.com/morski/TTI2IM
 
 ## Usage
 
-### Linux
 ./TTI2IMG [options]
-
-### Windows
-TTI2IMG.exe [options]
 
 Options:
 

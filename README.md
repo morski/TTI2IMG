@@ -1,2 +1,2 @@
 # TTI2IMG
-Convert tti teletext files to image
+Convert .tti teletext files to image

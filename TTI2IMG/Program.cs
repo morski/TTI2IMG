@@ -29,12 +29,7 @@ internal class Program
         // stdin
         if (opts.Path.Equals("-"))
         {
-            using (var sr = new StreamReader(Console.OpenStandardInput(), Console.InputEncoding))
-            {
-                var input = await sr.ReadToEndAsync();
-                var bytes = Encoding.ASCII.GetBytes(input);
-                await CreateImageFromBytes(bytes, opts);
-            }
+            await CreateImageFromStdIn(opts);
         }
         else
         {
@@ -43,18 +38,33 @@ internal class Program
             // Directory of files
             if (attr.HasFlag(FileAttributes.Directory))
             {
-                DirectoryInfo d = new(opts.Path);
-
-                foreach (var file in d.GetFiles("*.tti"))
-                {
-                    await CreateImageFromFile(file.FullName, opts);
-                }
+                await CreateImagesFromDirectory(opts);
             }
             // Single file
             else
             {
                 await CreateImageFromFile(opts.Path, opts);
             }
+        }
+    }
+
+    private static async Task CreateImageFromStdIn(CommandLineOptions opts)
+    {
+        using (var sr = new StreamReader(Console.OpenStandardInput(), Console.InputEncoding))
+        {
+            var input = await sr.ReadToEndAsync();
+            var bytes = Encoding.ASCII.GetBytes(input);
+            await CreateImageFromBytes(bytes, opts);
+        }
+    }
+
+    private static async Task CreateImagesFromDirectory(CommandLineOptions opts)
+    {
+        DirectoryInfo d = new(opts.Path);
+
+        foreach (var file in d.GetFiles("*.tti"))
+        {
+            await CreateImageFromFile(file.FullName, opts);
         }
     }
 
